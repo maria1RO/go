@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foco Solidário — Doe Agora</title>
+  <meta name="description" content="Ajude quem precisa. Cada doação faz a diferença.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://focodosolidario.site/">
+  <meta property="og:title" content="Foco Solidário — Doe Agora">
+  <meta property="og:description" content="Ajude quem precisa. Cada doação faz a diferença.">
+  <meta property="og:image" content="https://focodosolidario.site/nikolas.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '795487680196326');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=795487680196326&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+
+  <!-- UTMify -->
+  <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" async defer></script>
+  <script>
+    window.pixelId = "6a28df05c2b7dfb374e5ff53";
+    var a = document.createElement("script");
+    a.setAttribute("async", "");
+    a.setAttribute("defer", "");
+    a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+    document.head.appendChild(a);
+  </script>
+
+  <!-- Captura UTM do Facebook Ads -->
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const utmKeys = ['utm_source','utm_campaign','utm_medium','utm_content','utm_term'];
+      const utms = {};
+      utmKeys.forEach(k => { if (params.get(k)) utms[k] = params.get(k); });
+      if (Object.keys(utms).length) {
+        sessionStorage.setItem('utms', JSON.stringify(utms));
+        console.log('[UTM] Capturado:', utms);
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- URGENCY BAR -->
+  <div class="urgency-bar">
+    <span class="urgency-bar__dot"></span>
+    <span>Campanha ativa — cada doação faz a diferença na vida do Nikolas</span>
+    <span class="urgency-bar__sep">·</span>
+    <span><strong id="header-raised">R$ 23.450,00</strong> arrecadados até agora</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+
+      <div class="header__logo">
+        <img src="./logo.svg" alt="Foco Solidário" height="48" style="display:block;">
+      </div>
+
+<div class="header__actions">
+        <button class="header__cta" onclick="openAmountModal()">Doe Agora</button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- CAMPAIGN -->
+  <section class="campaign">
+    <div class="container campaign__grid">
+
+      <!-- Left: foto + história + doadores -->
+      <div class="campaign__content">
+
+        <div class="campaign__photo-wrap">
+          <img id="campaign-image" src="./nikolas.jpeg" alt="Nikolas" class="campaign__photo" onerror="this.style.display='none'">
+        </div>
+
+        <div class="campaign__meta">
+          <span>SAÚDE / TRATAMENTOS</span>
+          <span class="campaign__meta-sep">·</span>
+          <span>📍 Brasil</span>
+        </div>
+
+        <h1 class="campaign__title" id="campaign-title">Carregando...</h1>
+        <p class="campaign__story" id="campaign-story"></p>
+
+        <div class="campaign__photo-wrap campaign__photo-wrap--secondary">
+          <img src="./nikolas2.jpeg" alt="Nikolas" class="campaign__photo">
+        </div>
+
+        <div class="donors-card">
+          <div class="donors-card__title">💝 Doações Recentes</div>
+          <div class="donors-list" id="donors-list"></div>
+        </div>
+
+      </div>
+
+      <!-- Right: sidebar -->
+      <aside class="campaign__sidebar">
+        <div class="sidebar-card">
+
+          <div class="sidebar-progress-wrap">
+            <div class="sidebar-progress-track">
+              <div class="sidebar-progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="sidebar-progress-pct" id="progress-percent">0%</div>
+          </div>
+
+          <div class="sidebar-body">
+
+            <p class="sidebar-raised" id="raised-amount">R$ 0,00</p>
+            <p class="sidebar-goal-text">arrecadados de <strong><span id="goal-amount">R$ 0,00</span></strong></p>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-stats">
+              <div class="sidebar-stat-row">
+                <span>🤝 Apoiadores</span>
+                <strong id="supporters-count">1.232</strong>
+              </div>
+              <div class="sidebar-stat-row">
+                <span><span class="online-dot"></span> Vendo agora</span>
+                <strong id="viewers-count">—</strong>
+              </div>
+            </div>
+
+            <div class="sidebar-divider"></div>
+
+            <!-- Contador regressivo -->
+            <div class="sidebar-countdown">
+              <div class="countdown-label">⏳ Encerra em</div>
+              <div class="countdown-grid">
+                <div class="countdown-block"><span id="cd-days">30</span><small>dias</small></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span id="cd-hours">00</span><small>h</small></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span id="cd-mins">00</span><small>min</small></div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-block"><span id="cd-secs">00</span><small>seg</small></div>
+              </div>
+            </div>
+
+            <button class="btn-help btn-pulse" onclick="openAmountModal()">❤️ Doe agora e salve uma vida!</button>
+            <button class="btn-share" onclick="shareCampaign()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              Compartilhar campanha
+            </button>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="trust-row">
+              <span class="trust-row__icon">🔒</span>
+              <span class="trust-row__text">Doação protegida e processada com segurança</span>
+            </div>
+
+            <div class="creator-row">
+              <div class="creator-avatar">F</div>
+              <div>
+                <p class="creator-label">Campanha criada por</p>
+                <p class="creator-name">Família de Nikolas</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- VÍDEO -->
+  <section class="video-section">
+    <div class="container">
+      <p class="video-section__label">A história do Nikolas</p>
+      <h2 class="video-section__title">Ouça o relato da <em>família</em></h2>
+      <div class="video-wrap" id="video-container">
+        <video controls playsinline preload="metadata" style="width:100%;height:100%;display:block;border-radius:inherit;">
+          <source src="./nikolas-video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATUALIZAÇÃO RECENTE -->
+  <section class="updates-section">
+    <div class="container">
+      <div class="updates-header">
+        <p class="updates-label">📋 Últimas atualizações</p>
+        <h2 class="updates-title">Como o Nikolas <em>está hoje</em></h2>
+      </div>
+      <div class="updates-list">
+        <div class="update-card update-card--latest">
+          <div class="update-card__dot"></div>
+          <div class="update-card__date">07 de junho, 2026</div>
+          <h4 class="update-card__title">Nikolas completa nova semana de fisioterapia respiratória</h4>
+          <p class="update-card__text">A família relata evolução positiva. O pequeno respondeu bem às sessões e os médicos estão otimistas quanto à possibilidade de retirada gradual da traqueostomia nos próximos meses. Cada sessão custa em média R$ 150,00 e precisa ser realizada 3x por semana.</p>
+          <span class="update-card__badge">✅ Atualização mais recente</span>
+        </div>
+        <div class="update-card">
+          <div class="update-card__dot"></div>
+          <div class="update-card__date">Março, 2026</div>
+          <h4 class="update-card__title">Cirurgia de gastrostomia realizada com sucesso</h4>
+          <p class="update-card__text">Após 4 meses usando sonda nasoenteral, o Nikolas passou pela cirurgia de gastrostomia. O procedimento correu bem e agora ele se alimenta com mais segurança enquanto faz fonoterapia para desenvolver a deglutição.</p>
+        </div>
+        <div class="update-card">
+          <div class="update-card__dot"></div>
+          <div class="update-card__date">Janeiro, 2026</div>
+          <h4 class="update-card__title">Alta da UTI neonatal após batalha contra infecções</h4>
+          <p class="update-card__text">Depois de meses internado e três infecções hospitalares, o Nikolas recebeu alta da UTI. Um alívio imenso para a família — mas o tratamento contínuo em casa e com especialistas é fundamental para seu desenvolvimento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO O DINHEIRO É USADO -->
+  <section class="transparency-section">
+    <div class="container">
+      <p class="transparency-label">💚 Total transparência</p>
+      <h2 class="transparency-title">Como cada real é <em>destinado</em></h2>
+      <div class="transparency-grid">
+        <div class="transparency-item">
+          <div class="transparency-icon">🫁</div>
+          <div class="transparency-bar-wrap">
+            <div class="transparency-bar-label">
+              <span>Fisioterapia Respiratória</span>
+              <strong>40%</strong>
+            </div>
+            <div class="transparency-track"><div class="transparency-fill" style="width:40%"></div></div>
+          </div>
+          <p class="transparency-desc">3x por semana para auxiliar na retirada da traqueostomia</p>
+        </div>
+        <div class="transparency-item">
+          <div class="transparency-icon">🗣️</div>
+          <div class="transparency-bar-wrap">
+            <div class="transparency-bar-label">
+              <span>Fonoterapia</span>
+              <strong>35%</strong>
+            </div>
+            <div class="transparency-track"><div class="transparency-fill" style="width:35%"></div></div>
+          </div>
+          <p class="transparency-desc">Sessões semanais para desenvolver deglutição e retirar a gastrostomia</p>
+        </div>
+        <div class="transparency-item">
+          <div class="transparency-icon">💊</div>
+          <div class="transparency-bar-wrap">
+            <div class="transparency-bar-label">
+              <span>Insumos e Materiais</span>
+              <strong>15%</strong>
+            </div>
+            <div class="transparency-track"><div class="transparency-fill" style="width:15%"></div></div>
+          </div>
+          <p class="transparency-desc">Insumos da traqueostomia, gastrostomia e medicamentos</p>
+        </div>
+        <div class="transparency-item">
+          <div class="transparency-icon">🚗</div>
+          <div class="transparency-bar-wrap">
+            <div class="transparency-bar-label">
+              <span>Transporte e Consultas</span>
+              <strong>10%</strong>
+            </div>
+            <div class="transparency-track"><div class="transparency-fill" style="width:10%"></div></div>
+          </div>
+          <p class="transparency-desc">Deslocamento para consultas com especialistas e retornos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="testimonials__title">Quem já <em>ajudou</em> fala</h2>
+
+      <div class="testimonials__carousel" id="testimonials-carousel">
+        <div class="testimonials__track" id="testimonials-track">
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__header">
+              <div class="testimonial-avatar">FR</div>
+              <div>
+                <p class="testimonial-name">Fernanda Rocha</p>
+                <p class="testimonial-amount">Doou R$ 150,00 · há 2 horas</p>
+              </div>
+            </div>
+            <p class="testimonial-text">"Vi a história do Nikolas no WhatsApp e não consegui segurar as lágrimas. Um bebê tão pequeno passando por tanta coisa... Pouco que eu podia ajudar, mas espero que some com muitos outros. Força, família!"</p>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__header">
+              <div class="testimonial-avatar" style="background: linear-gradient(135deg, #6366F1, #8B5CF6);">CM</div>
+              <div>
+                <p class="testimonial-name">Carlos Mendes</p>
+                <p class="testimonial-amount">Doou R$ 100,00 · há 5 horas</p>
+              </div>
+            </div>
+            <p class="testimonial-text">"Meu filho ficou internado na UTI neonatal e sei exatamente o desespero que os pais estão sentindo. Estou torcendo muito pelo Nikolas. Força, família!"</p>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__header">
+              <div class="testimonial-avatar" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">AL</div>
+              <div>
+                <p class="testimonial-name">Ana Lima</p>
+                <p class="testimonial-amount">Doou R$ 300,00 · há 1 dia</p>
+              </div>
+            </div>
+            <p class="testimonial-text">"Esse bebê já passou por mais cirurgias do que muitos adultos em toda a vida. Que essa campanha alcance a meta logo e Nikolas possa respirar com liberdade!"</p>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__header">
+              <div class="testimonial-avatar" style="background: linear-gradient(135deg, #10B981, #059669);">MS</div>
+              <div>
+                <p class="testimonial-name">Mariana Souza</p>
+                <p class="testimonial-amount">Doou R$ 75,00 · há 3 horas</p>
+              </div>
+            </div>
+            <p class="testimonial-text">"Sou mãe e só de imaginar passar por isso meu coração aperta. Que Deus abençoe a família e que o Nikolas logo possa crescer saudável e cheio de vida!"</p>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-card__header">
+              <div class="testimonial-avatar" style="background: linear-gradient(135deg, #3B82F6, #1D4ED8);">RP</div>
+              <div>
+                <p class="testimonial-name">Ricardo Pinto</p>
+                <p class="testimonial-amount">Doou R$ 200,00 · há 6 horas</p>
+              </div>
+            </div>
+            <p class="testimonial-text">"Vi o vídeo e não consegui ficar parado. Uma criança com tanta força merece toda a ajuda do mundo. Vamos alcançar a meta!"</p>
+            <div class="testimonial-stars">★★★★★</div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="testimonials__dots" id="testimonials-dots"></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <!-- Documentação médica -->
+  <section class="docs-section">
+    <div class="container">
+      <div class="docs-header">
+        <p class="docs-label">Transparência total</p>
+        <h2 class="docs-title">Documentação <em>médica</em></h2>
+        <p class="docs-subtitle">Toda a história do Nikolas é comprovada. Abaixo alguns dos documentos que atestam o diagnóstico e a necessidade dos tratamentos.</p>
+      </div>
+      <div class="docs-grid">
+        <div class="docs-card">
+          <div class="docs-card__img-wrap">
+            <img src="./doc-laudo.svg" alt="Laudo médico" class="docs-card__img" onerror="this.closest('.docs-card__img-wrap').innerHTML='<div class=\'docs-card__placeholder\'>📄</div>'">
+          </div>
+          <div class="docs-card__info">
+            <p class="docs-card__title">Laudo de Traqueostomia</p>
+            <p class="docs-card__desc">Procedimento realizado com 30 dias de vida — Hospital registrado</p>
+          </div>
+        </div>
+        <div class="docs-card">
+          <div class="docs-card__img-wrap">
+            <img src="./doc-receita.svg" alt="Receita médica" class="docs-card__img" onerror="this.closest('.docs-card__img-wrap').innerHTML='<div class=\'docs-card__placeholder\'>📋</div>'">
+          </div>
+          <div class="docs-card__info">
+            <p class="docs-card__title">Prescrição de Fisioterapia</p>
+            <p class="docs-card__desc">Indicação de fisioterapia respiratória intensiva pelo especialista</p>
+          </div>
+        </div>
+        <div class="docs-card">
+          <div class="docs-card__img-wrap">
+            <img src="./doc-gastrostomia.svg" alt="Documento gastrostomia" class="docs-card__img" onerror="this.closest('.docs-card__img-wrap').innerHTML='<div class=\'docs-card__placeholder\'>🏥</div>'">
+          </div>
+          <div class="docs-card__info">
+            <p class="docs-card__title">Procedimento de Gastrostomia</p>
+            <p class="docs-card__desc">Março de 2026 — 4 meses após uso de sonda nasoenteral</p>
+          </div>
+        </div>
+      </div>
+      <p class="docs-notice">📌 Dados pessoais sensíveis foram ocultados para proteção da privacidade da família.</p>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="container">
+      <p class="faq-label">❓ Dúvidas frequentes</p>
+      <h2 class="faq-title">Perguntas <em>frequentes</em></h2>
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary class="faq-question">É seguro fazer uma doação aqui?</summary>
+          <p class="faq-answer">Sim. O pagamento é processado via PIX pela <strong>XF Hub de Pagamentos</strong>, uma plataforma regulamentada. Seus dados são criptografados com SSL e nunca compartilhados com terceiros. O nome que aparece no PIX será <strong>XF Hub</strong> — nunca pague para outro CNPJ.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Como funciona a doação via PIX?</summary>
+          <p class="faq-answer">Após escolher o valor e preencher seus dados, você recebe um QR Code e um código PIX. Basta abrir o app do seu banco, escolher PIX e escanear o QR Code ou colar o código. A confirmação é instantânea — em segundos você verá a confirmação na tela.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Como sei que a campanha é verdadeira?</summary>
+          <p class="faq-answer">A história do Nikolas é real e documentada. A família autorizou o uso das fotos e vídeos para divulgação. Você pode entrar em contato diretamente pelo WhatsApp ou e-mail disponíveis no rodapé para esclarecer qualquer dúvida antes de doar.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Posso acompanhar o uso das doações?</summary>
+          <p class="faq-answer">Sim! A seção "Últimas atualizações" desta página é atualizada regularmente com o progresso do Nikolas e como os recursos estão sendo utilizados. Toda doação vai diretamente para os tratamentos listados.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-question">Posso cancelar ou pedir reembolso?</summary>
+          <p class="faq-answer">Por se tratar de uma doação voluntária, o reembolso não é automático. Em caso de dúvida ou necessidade, entre em contato pelo e-mail <strong>contato@focodosolidario.site</strong> e analisamos individualmente.</p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="container trust-bar__inner">
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        <div>
+          <strong>Pagamento 100% Seguro</strong>
+          <span>Dados criptografados SSL</span>
+        </div>
+      </div>
+      <div class="trust-separator"></div>
+      <div class="trust-item">
+        <span class="trust-icon">⚡</span>
+        <div>
+          <strong>PIX Instantâneo</strong>
+          <span>Confirmação em segundos</span>
+        </div>
+      </div>
+      <div class="trust-separator"></div>
+      <div class="trust-item">
+        <span class="trust-icon">💙</span>
+        <div>
+          <strong>100% Destinado</strong>
+          <span>Direto para a campanha</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">
+        <img src="./logo-white.svg" alt="Foco Solidário" height="40" style="display:block;">
+      </div>
+      <div class="footer__info">
+        <p id="footer-cnpj">CNPJ: 00.000.000/0000-00</p>
+        <p id="footer-email">contato@campanha.org</p>
+        <p>© 2026 Todos os direitos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AMOUNT SELECTION MODAL -->
+  <div class="modal-overlay hidden" id="amount-modal" onclick="handleAmountOverlayClick(event)">
+    <div class="modal amount-modal">
+      <button class="modal-close-btn" onclick="closeAmountModal()" aria-label="Fechar">✕</button>
+
+      <!-- Step 1: Escolha o valor -->
+      <div id="checkout-step-amounts">
+        <div class="modal__header">
+          <h2 class="modal__title">Quanto você quer <em>contribuir?</em></h2>
+        </div>
+        <div class="modal__body">
+          <div class="amount-grid" id="amount-grid"></div>
+          <div id="error-donation" class="error-banner hidden"></div>
+          <div class="payment-notice payment-notice--compact">
+            <span class="payment-notice__icon">🔒</span>
+            <p>PIX processado por <strong>XF Hub</strong>. O nome no PIX será <strong>XF Hub</strong> — não pague para outros CNPJs.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Seus dados -->
+      <div id="checkout-step-form" class="hidden">
+        <div class="modal__header">
+          <div>
+            <button class="checkout-back-btn" onclick="backToAmounts()">← Trocar valor</button>
+            <h2 class="modal__title">Seus <em>dados</em></h2>
+            <p class="checkout-amount-label">Doando <strong id="checkout-display-amount">R$ 0,00</strong></p>
+          </div>
+        </div>
+        <div class="modal__body">
+          <div class="checkout-form">
+            <div class="form-group">
+              <label for="checkout-name">Nome completo</label>
+              <input type="text" id="checkout-name" placeholder="Seu nome e sobrenome" autocomplete="name">
+            </div>
+            <div class="form-group">
+              <label for="checkout-cpf">CPF</label>
+              <input type="text" id="checkout-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="checkout-email">E-mail</label>
+              <input type="email" id="checkout-email" placeholder="seu@email.com" autocomplete="email">
+            </div>
+          </div>
+          <div id="error-checkout" class="error-banner hidden"></div>
+          <div class="generating-state hidden" id="generating-state">
+            <div class="waiting-spinner gen-spinner"></div>
+            <span>Gerando seu PIX…</span>
+          </div>
+          <button class="btn-pix-submit" onclick="submitCheckout()">⚡ Gerar PIX</button>
+
+          <div class="checkout-trust">
+            <div class="checkout-trust__seals">
+              <span class="checkout-seal">🔒 SSL Seguro</span>
+              <span class="checkout-seal">✅ PIX Oficial</span>
+              <span class="checkout-seal">🏦 Banco Central</span>
+            </div>
+            <p class="checkout-trust__notice">PIX processado por <strong>XF Hub</strong>. O nome no PIX será <strong>XF Hub</strong> — não pague para outros CNPJs.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PIX MODAL -->
+  <div class="modal-overlay hidden" id="pix-modal" onclick="handleOverlayClick(event)">
+    <div class="modal">
+      <div class="modal__header">
+        <div>
+          <h2 class="modal__title">Pague com PIX</h2>
+          <p class="modal__amount-label">Valor: <strong id="modal-amount">R$ 0,00</strong></p>
+        </div>
+        <div class="modal__expiry-badge" id="pix-expiry-badge">
+          ⏱ <span id="pix-expires-text">30:00</span>
+        </div>
+      </div>
+      <div class="modal__body">
+        <div class="qr-wrapper">
+          <div class="qr-frame">
+            <img id="pix-qrcode" alt="QR Code PIX" width="200" height="200">
+          </div>
+          <p class="qr-label">Escaneie com seu app de banco</p>
+        </div>
+        <div class="or-divider"><span>ou use o código abaixo</span></div>
+        <div class="copy-wrapper">
+          <input type="text" id="pix-copy-paste" readonly class="copy-input" aria-label="Código PIX copia e cola">
+          <button class="btn btn-copy" onclick="copyPixCode()" id="copy-btn">📋 Copiar</button>
+        </div>
+        <ol class="pix-steps">
+          <li>Abra o app do seu banco</li>
+          <li>Vá em <strong>PIX → Pagar com QR Code</strong> ou <strong>Copia e Cola</strong></li>
+          <li>Cole o código ou escaneie o QR Code</li>
+          <li>Confirme o pagamento e pronto!</li>
+        </ol>
+        <div class="payment-notice">
+          <span class="payment-notice__icon">🔒</span>
+          <div>
+            <strong>Pagamento via XF Hub de Pagamentos</strong>
+            <p>O CNPJ (Nome do PIX) será da <strong>XF Hub</strong> — não pague para outros CNPJs.</p>
+          </div>
+        </div>
+
+        <div class="waiting-state" id="waiting-state">
+          <div class="waiting-spinner"></div>
+          <span>Aguardando confirmação do pagamento…</span>
+        </div>
+        <div class="success-state hidden" id="success-state">
+          <div class="success-icon">
+            <svg viewBox="0 0 52 52" class="success-svg">
+              <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
+              <path class="success-check" fill="none" d="M14 27l8 8 16-16"/>
+            </svg>
+          </div>
+          <h3 class="success-title">Pagamento Confirmado!</h3>
+          <p class="success-msg">Obrigado de coração! Você acaba de dar uma esperança para o Nikolas. ❤️</p>
+
+          <a id="success-whatsapp" class="btn-success-share" href="#" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Compartilhar no WhatsApp
+          </a>
+
+          <!-- Rifa -->
+          <div class="order-bump order-bump--raffle">
+            <div class="order-bump__badge">🚗 Rifa Especial</div>
+            <h4 class="order-bump__title">Por R$ 5 você concorre a um carro!</h4>
+            <p class="order-bump__text">Você já fez sua parte pelo Nikolas. Por apenas R$ 5 a mais você recebe um bilhete e concorre a um carro 0km. Sorteio via loteria federal.</p>
+            <button class="order-bump__btn--raffle-cta" onclick="orderBump(5)">🎟 Quero meu bilhete — R$ 5</button>
+            <p class="order-bump__disclaimer">Bilhete enviado por e-mail após confirmação do pagamento.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn-ghost" onclick="closePixModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- WHATSAPP FLUTUANTE -->
+  <a id="whatsapp-btn" class="whatsapp-btn" href="#" target="_blank" rel="noopener" aria-label="Compartilhar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- MOBILE CTA FLUTUANTE -->
+  <div class="mobile-cta">
+    <button class="mobile-cta__btn" onclick="openAmountModal()">❤️ Doe agora e salve uma vida!</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
